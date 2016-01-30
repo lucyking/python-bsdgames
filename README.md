@@ -1,5 +1,4 @@
 # python-bsdgames
-bsdgames python port
 ------------------------------
 ##Install
 ```
