@@ -5,7 +5,7 @@
 pip install bsdgames
 ```
 ##Usage
-- [x] pom 
+- [x] **pom** 
 ```
      >>>form bsdgames import *
      >>>pom()
