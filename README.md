@@ -1,5 +1,5 @@
 # python-bsdgames
-------------------------------
+
 ##Install
 ```
 pip install bsdgames
