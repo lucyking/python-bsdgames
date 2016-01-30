@@ -1,5 +1,11 @@
 # python-bsdgames
 bsdgames python port
+------------------------------
+##Install
+```
+pip install bsdgames
+```
+##Usage
 - pom[v] 
 ```
      >>>form bsdgames import *
