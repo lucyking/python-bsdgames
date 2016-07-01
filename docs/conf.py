@@ -14,6 +14,8 @@
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
+import sphinx_rtd_theme
+
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
@@ -121,6 +123,7 @@ todo_include_todos = False
 #
 #html_theme = 'alabaster'
 html_theme = 'sphinx-rtd-theme'
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
