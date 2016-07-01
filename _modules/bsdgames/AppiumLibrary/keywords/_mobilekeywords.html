@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bsdgames.AppiumLibrary.keywords._mobilekeywords &mdash; ALPHA 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="ALPHA 0.0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for bsdgames.AppiumLibrary.keywords._mobilekeywords</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">keywordgroup</span> <span class="kn">import</span> <span class="n">KeywordGroup</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+
+<div class="viewcode-block" id="_MobileKeywords"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords">[docs]</a><span class="k">class</span> <span class="nc">_MobileKeywords</span><span class="p">(</span><span class="n">KeywordGroup</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    _MobileKeywords including the Wrapper Keywords for RFUI Framework specially. </span>
+<span class="sd">    Move from the common_lib_mobile.py.</span>
+<span class="sd">    The following keywords can be add/delete/modify according to the RFUI Framework requirement.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mobile_gen_gif</span> <span class="o">=</span> <span class="bp">False</span>
+
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Set_Gif_Flag"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Set_Gif_Flag">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Set_Gif_Flag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mobile_gif_flag</span><span class="o">=</span><span class="s">&quot;FALSE&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set Mobile GIF Generation Flag. (Default: &quot;FALSE&quot; / &quot;TRUE&quot;: generate one GIF file for each TestCase)</span>
+<span class="sd">        设置用例生成GIF开关.(默认设置为&quot;FALSE&quot;, 当设置为“TRUE/True”时， 每个用例都会生成一份同名的gif文件)</span>
+<span class="sd">        This KW will invoke at Library importing, Also Can be invoked during case running.</span>
+<span class="sd">        | Mobile Set Gif Flag | TRUE | #enable genrate gif for test case |</span>
+<span class="sd">        | Mobile Set Gif Flag | FALSE | #disable genrate gif for test case  |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mobile_gif_flag</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;TRUE&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_mobile_gen_gif</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_mobile_gen_gif</span> <span class="o">=</span> <span class="bp">False</span></div>
+
+    <span class="c"># Public, keywords</span>
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Open_Application"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Open_Application">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Open_Application</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">myremote_url</span><span class="p">,</span> <span class="n">myalias</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;打开Moible(IOS/Android)端APP</span>
+<span class="sd">        | Mobile Open Application | ${remote_url} | MyIOSapp | platformName=iOS | platformVersion=9.1 | deviceName=&#39;iPhone 6&#39; app=${yourapp_path} | </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">myindex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_application</span><span class="p">(</span><span class="n">myremote_url</span><span class="p">,</span> <span class="n">alias</span><span class="o">=</span><span class="n">myalias</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&quot;[&gt;&gt;&gt;]index of open_application: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">myindex</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">myindex</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Close_Application"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Close_Application">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Close_Application</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;关闭 当前活动的Moible(IOS/Android)端APP</span>
+<span class="sd">        | Mobile Close Application | |</span>
+<span class="sd">        &quot;&quot;&quot;</span>       
+        <span class="bp">self</span><span class="o">.</span><span class="n">close_application</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&quot;[&gt;&gt;&gt;]close_application!&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Switch_Application"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Switch_Application">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Switch_Application</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alias_or_index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;切换至指定的alias_or_index Moible(IOS/Android)端APP</span>
+<span class="sd">        | Mobile Switch Application | ${alias_or_index} |</span>
+<span class="sd">        | Mobile Switch Application | MyIOSapp |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">switch_application</span><span class="p">(</span><span class="n">alias_or_index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&quot;[&gt;&gt;&gt;]switch_application to alias_or_index:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">alias_or_index</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Click_Element"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Click_Element">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Click_Element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">target_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;点击locator定义的元素， （locator搜索结果为多个元素，默认点击其中第一个，可以设定target_num，点击指定第n元素）</span>
+<span class="sd">        locator: 同AppiumLibrary里的locator;</span>
+<span class="sd">        target_num: 指定元素序号.</span>
+<span class="sd">        [不输入（默认值）:   点击第一个元素]</span>
+<span class="sd">        [=0 :                点击最后一个元素]</span>
+<span class="sd">        [=x（&gt;0）:           点击第x个元素]</span>
+
+<span class="sd">        | Mobile Click Element | ${locator} |</span>
+<span class="sd">        Android Native: </span>
+<span class="sd">        | Mobile Click Element | identifier=myid |</span>
+<span class="sd">        | Mobile Click Element | xpath=//android.widget.TextView[@text=&quot;文本&quot;] |</span>
+<span class="sd">        | Mobile Click Element | xpath=//android.widget.lsView/android.widget.RelativeLayout[3] |</span>
+<span class="sd">        @text表示的是android.widget.TextView的一个text属性，&quot;文本&quot;是该属性的值，用&quot;&quot;引起来，是xpath的一种写法</span>
+<span class="sd">        </span>
+<span class="sd">        Android WebView: </span>
+<span class="sd">        | Mobile Click Element | accessibility_id=公众号名称 |</span>
+<span class="sd">        | Mobile Click Element | accessibility_id=公众号名称 | 0 |</span>
+<span class="sd">        </span>
+<span class="sd">        IOS Native: </span>
+<span class="sd">        | Mobile Click Element | identifier=myid |</span>
+<span class="sd">        | Mobile Click Element | id=public icon normal |</span>
+<span class="sd">        | Mobile Click Element | xpath=//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[2] |</span>
+
+<span class="sd">        IOS WebView:</span>
+<span class="sd">        | Mobile Click Element | xpath=//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAWebView[1]/UIAStaticText[27] |</span>
+
+<span class="sd">        locator 示例:</span>
+<span class="sd">        | *Strategy*        | *Example*                                                      | *Description*                     |</span>
+<span class="sd">        | identifier Click Element | identifier=my_element | Matches by @id or @name attribute |</span>
+<span class="sd">        | id Click Element | id=my_element | Matches by @id attribute |</span>
+<span class="sd">        | name Click Element | name=my_element | Matches by @name attribute |</span>
+<span class="sd">        | xpath Click Element | xpath=//UIATableView/UIATableCell/UIAButton | Matches with arbitrary XPath | </span>
+<span class="sd">        | class Click Element | class=UIAPickerWheel | Matches by class | </span>
+<span class="sd">        | accessibility_id Click Element | accessibility_id=t | Accessibility options utilize. | </span>
+<span class="sd">        | android Click Element | android=new UiSelector().description(&#39;Apps&#39;) | Matches by Android UI Automator   |</span>
+<span class="sd">        | ios     Click Element | ios=.buttons().withName(&#39;Apps&#39;)              | Matches by iOS UI Automation      |</span>
+<span class="sd">        | css     Click Element | css=.green_button                            | Matches by css in webview         |</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">target_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selected_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+        <span class="n">target_element</span><span class="o">.</span><span class="n">click</span><span class="p">()</span></div>
+        
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Click_Text_Button"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Click_Text_Button">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Click_Text_Button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">target_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;点击可以通过按钮内文字定位的Button， （相同文字的按钮如果是多个，默认点击其中第一个，可以设定target_num，点击指定第n元素）</span>
+<span class="sd">        text: 为按钮内的文字, 比如： 欢迎页－登录  主菜单页－发现／好友／电话／我</span>
+<span class="sd">        target_num: 指定元素序号</span>
+<span class="sd">        [不输入（默认值）:   点击第一个元素]</span>
+<span class="sd">        [=0 :                点击最后一个元素]</span>
+<span class="sd">        [=x（&gt;0）:           点击第x个元素]</span>
+<span class="sd">        </span>
+<span class="sd">        | Mobile Click Text Button | ${text} |</span>
+<span class="sd">        IOS/Android:</span>
+<span class="sd">        | Mobile Click Text Button | 登录 |</span>
+<span class="sd">        | Mobile Click Text Button | ${text} |</span>
+<span class="sd">        | Mobile Click Text Button | 发送的消息内容 | 0 |</span>
+<span class="sd">        | Mobile Click Text Button | 发送的消息内容 | 3 |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_andriod</span><span class="p">():</span>
+            <span class="c">#Android example:   xpath=//*[@text=&quot;登录&quot;]</span>
+            <span class="n">mylocator</span> <span class="o">=</span> <span class="s">&#39;xpath=//*[@text=&#39;</span> <span class="o">+</span> <span class="s">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">text</span> <span class="o">+</span> <span class="s">&#39;&quot;]&#39;</span>
+            <span class="c">#mylocator = &#39;xpath=//android.widget.Button[@text=&#39; + &#39;&quot;&#39; + text + &#39;&quot;]&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ios</span><span class="p">():</span>
+            <span class="c">#iOS example: id=登录 </span>
+            <span class="n">mylocator</span> <span class="o">=</span> <span class="s">&#39;identifier=&#39;</span> <span class="o">+</span> <span class="n">text</span>
+            <span class="c">#mylocator = &#39;id=&#39; + text        </span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Click_Element</span><span class="p">(</span><span class="n">mylocator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Long_Press"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Long_Press">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Long_Press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;长时间按 locator定义的UI元素</span>
+<span class="sd">        locator: 同AppiumLibrary里的locator</span>
+<span class="sd">        | Mobile Long Press | ${locator} |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">long_press</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Long_Press_Text_Button"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Long_Press_Text_Button">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Long_Press_Text_Button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;长时间按 可以通过按钮内文字定位的Button</span>
+<span class="sd">        text: 为按钮内的文字</span>
+<span class="sd">        | Mobile Long Press Text Button | ${text} |</span>
+<span class="sd">        | Mobile Long Press Text Button | 发送的消息 |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_andriod</span><span class="p">():</span>
+            <span class="c">#Android example:   xpath=//*[@text=&quot;登录&quot;]</span>
+            <span class="n">mylocator</span> <span class="o">=</span> <span class="s">&#39;xpath=//*[@text=&#39;</span> <span class="o">+</span> <span class="s">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">text</span> <span class="o">+</span> <span class="s">&#39;&quot;]&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ios</span><span class="p">():</span>
+            <span class="c">#iOS example: id=登录 </span>
+            <span class="n">mylocator</span> <span class="o">=</span> <span class="s">&#39;identifier=&#39;</span> <span class="o">+</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Long_Press</span><span class="p">(</span><span class="n">mylocator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Input_Text"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Input_Text">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Input_Text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;向文本框中输入文本</span>
+<span class="sd">        | Mobile Input Text | ${locator} |  ${text} |</span>
+<span class="sd">        locator: 同AppiumLibrary里的locator</span>
+<span class="sd">        text: 用户名</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_text</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Clear_Text"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Clear_Text">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Clear_Text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;清空文本框中的文本</span>
+<span class="sd">        | Mobile Clear Text | ${locator} |</span>
+<span class="sd">        locator: 同AppiumLibrary里的locator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_text</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Capture_Page_Screenshot"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Capture_Page_Screenshot">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Capture_Page_Screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;抓取当前页面截屏图片</span>
+<span class="sd">        | Mobile Capture Page Screenshot |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capture_page_screenshot</span><span class="p">()</span> </div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Page_Should_Contain_Text"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Page_Should_Contain_Text">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Page_Should_Contain_Text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;验证当前页面是否包含text</span>
+<span class="sd">        | Mobile Page Should Contain Text | ${text} |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Wait_Until_Text_Exist</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_should_contain_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Page_Should_Contain_Element"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Page_Should_Contain_Element">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Page_Should_Contain_Element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;验证当前页面是否包含locator定位的元素</span>
+<span class="sd">        | Mobile Page Should Contain Element | ${locator} |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Wait_Until_Element_Exist</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_should_contain_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Page_Should_Not_Contain_Text"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Page_Should_Not_Contain_Text">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Page_Should_Not_Contain_Text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;验证当前页面是否 不包含text</span>
+<span class="sd">        | Mobile Page Should Not Contain_Text | ${text} |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Wait_Until_Text_Vanish</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_should_not_contain_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Page_Should_Not_Contain_Element"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Page_Should_Not_Contain_Element">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Page_Should_Not_Contain_Element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;验证当前页面是否 不包含locator定位的元素</span>
+<span class="sd">        | Mobile Page Should Not Contain_Element | ${locator} |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Wait_Until_Element_Vanish</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_should_not_contain_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span></div>
+
+    <span class="c"># Wait KWs</span>
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Wait_Until_Text_Exist"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Wait_Until_Text_Exist">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Wait_Until_Text_Exist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;timeout时间内，等待至当前页面包含text</span>
+
+<span class="sd">        text 页面包含的文本</span>
+<span class="sd">        timeout 设置等待时间(s)，默认值为库设定值</span>
+<span class="sd">        | Mobile Wait Until Text Exist| ${text} |</span>
+<span class="sd">        | Mobile Wait Until Text Exist| Hello! |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Wait_Until_Element_Exist"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Wait_Until_Element_Exist">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Wait_Until_Element_Exist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;timeout时间内，等待至当前页面包含locator指定的元素</span>
+
+<span class="sd">        locator 元素定位</span>
+<span class="sd">        timeout 设置等待时间(s)，默认值为库设定值</span>
+<span class="sd">        | Mobile Wait Until Element Exist | ${locator} |</span>
+<span class="sd">        | Mobile Wait Until Element Exist | id=myid |</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Wait_Until_Text_Vanish"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Wait_Until_Text_Vanish">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Wait_Until_Text_Vanish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;timeout时间内，等待至当前页面不包含text</span>
+
+<span class="sd">        text 页面不包含的文本</span>
+<span class="sd">        timeout 设置等待时间(s)，默认值为库设定值</span>
+<span class="sd">        | Mobile Wait Until Text Vanish | ${text} |</span>
+<span class="sd">        | Mobile Wait Until Text Vanish | Hello! |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_does_not_contain</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Wait_Until_Element_Vanish"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Wait_Until_Element_Vanish">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Wait_Until_Element_Vanish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;timeout时间内，等待当前页面不包含locator指定的元素</span>
+
+<span class="sd">        locator 元素定位</span>
+<span class="sd">        timeout 设置等待时间(s)，默认值为库设定值</span>
+<span class="sd">        | Mobile Wait Until Element Vanish  | ${locator} |</span>
+<span class="sd">        | Mobile Wait Until Element Vanish  | id=myid |</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_does_not_contain_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Swipe"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Swipe">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Swipe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_x</span><span class="p">,</span> <span class="n">start_y</span><span class="p">,</span> <span class="n">end_x</span><span class="p">,</span> <span class="n">end_y</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;定义滑动操作</span>
+
+<span class="sd">        添加了1s延迟</span>
+<span class="sd">        start_x 起始x轴坐标</span>
+<span class="sd">        start_y 起始y轴坐标</span>
+<span class="sd">        end_x 结束x轴坐标</span>
+<span class="sd">        end_y 结束y轴坐标</span>
+<span class="sd">        duration 操作的时间间隔单位ms</span>
+<span class="sd">        | Mobile_Swipe | start_x | start_y | end_x | end_y | duration |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="c">#延迟1s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">swipe</span><span class="p">(</span><span class="n">start_x</span><span class="p">,</span> <span class="n">start_y</span><span class="p">,</span> <span class="n">end_x</span><span class="p">,</span> <span class="n">end_y</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Get_Element_Attribute"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Get_Element_Attribute">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Get_Element_Attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;获取指定位置元素的属性</span>
+
+<span class="sd">        locator 元素位置</span>
+<span class="sd">        attribute 属性：name, value, text...</span>
+<span class="sd">        | Mobile Get Element Attribute | locator | name |</span>
+<span class="sd">        | Mobile Get Element Attribute | locator | text |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_element_attribute</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Switch_To_Context"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Switch_To_Context">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Switch_To_Context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;切换native和webview</span>
+
+<span class="sd">        context 通常是&#39;NATIVE_APP&#39;和&#39;WEBVIEW_X&#39;两种</span>
+<span class="sd">        | Mobile Switch To Context | NATIVE_APP |</span>
+<span class="sd">        | Mobile Switch To Context | WEBVIEW_3 |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">switch_to_context</span><span class="p">(</span><span class="n">context</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Click_WebView_TextElement"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Click_WebView_TextElement">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Click_WebView_TextElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">target_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;用于移动端WebView中的带文本的元素点击操作,支持自动滚屏，可以点击未进入webview屏幕的元素</span>
+
+<span class="sd">        | Mobile Click WebView TextElement | 更多游戏 | </span>
+<span class="sd">        如果有重复元素，可以用target_num选择第几个</span>
+<span class="sd">        | Mobile Click WebView TextElement | ${text} | ${target_num}|</span>
+<span class="sd">        | Mobile Click WebView TextElement | 下载 | 3 |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_andriod</span><span class="p">():</span>
+            <span class="n">textelement</span> <span class="o">=</span> <span class="s">&#39;accessibility_id=&#39;</span> <span class="o">+</span> <span class="n">text</span>
+            <span class="c">#try search elment with ${text}, if failed try search element with ${text}+&#39; Link&#39; (易信内置webview)</span>
+            <span class="k">try</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">textelement</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                 <span class="n">textelement</span> <span class="o">+=</span> <span class="s">&quot; Link&quot;</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ios</span><span class="p">():</span>
+            <span class="n">textelement</span> <span class="o">=</span> <span class="s">&#39;xpath=//UIAStaticText[@name=&quot;</span><span class="si">%s</span><span class="s">&quot;]&#39;</span> <span class="o">%</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Click_WebView_Element</span><span class="p">(</span><span class="n">textelement</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Click_WebView_Element"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Click_WebView_Element">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Click_WebView_Element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">target_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;用于移动端WebView中locator定义的元素点击操作,支持自动滚屏,可以点击未进入webview屏幕的元素</span>
+
+<span class="sd">        | Mobile Click WebView Element | accessibility_id=webview_ico_home_games_all_played_2x |</span>
+<span class="sd">        如果有重复元素，可以用target_num选择第几个</span>
+<span class="sd">        | Mobile Click WebView Element | ${text}  | 3 |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_click_webview_element_autoswipe</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Get_Elements_Num"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Get_Elements_Num">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Get_Elements_Num</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;返回符合locator定义的元素的个数 0-n</span>
+<span class="sd"> </span>
+<span class="sd">        | Mobile Get Elements Num | ${locator} |</span>
+<span class="sd">        | Mobile Get Elements Num | identifier=myid |</span>
+<span class="sd">        | ${element_num} | Mobile Get Elements Num | identifier=myid |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+            <span class="n">elements_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_elements</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+            <span class="c">#self._debug(&quot;[debug] Mobile_Get_Elements_Num: try step2 elements_list: %d!&quot; % len(elements_list))</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements_list</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="c">#self._debug(&quot;[debug] Mobile_Get_Elements_Num: except path!&quot;)</span>
+            <span class="k">return</span> <span class="mi">0</span>        </div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Get_Text_Button_Num"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Get_Text_Button_Num">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Get_Text_Button_Num</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;返回匹配‘text’的文本/按钮元素的个数 0-n</span>
+<span class="sd"> </span>
+<span class="sd">        | Mobile Get Text Button Num | ${text} |</span>
+<span class="sd">        | Mobile Get Text Button Num | 登录 |</span>
+<span class="sd">        | ${element_num} | Mobile Get Text Button Num| 登录 |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_andriod</span><span class="p">():</span>
+            <span class="c">#Android example:   xpath=//*[@text=&quot;登录&quot;]</span>
+            <span class="n">mylocator</span> <span class="o">=</span> <span class="s">&#39;xpath=//*[@text=&#39;</span> <span class="o">+</span> <span class="s">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">text</span> <span class="o">+</span> <span class="s">&#39;&quot;]&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ios</span><span class="p">():</span>
+            <span class="c">#iOS example: id=登录 </span>
+            <span class="n">mylocator</span> <span class="o">=</span> <span class="s">&#39;identifier=&#39;</span> <span class="o">+</span> <span class="n">text</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Get_Elements_Num</span><span class="p">(</span><span class="n">mylocator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Press_Keycode"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Press_Keycode">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Press_Keycode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keycode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Android Only，向Android系统下发keycode按键事件</span>
+<span class="sd">        具体按键事件定义，可参考：</span>
+<span class="sd">        http://developer.android.com/reference/android/view/KeyEvent.html</span>
+
+<span class="sd">        | ${KEYCODE_MENU} | Set Variable | 82 |</span>
+<span class="sd">        | Mobile Press Keycode | ${KEYCODE_MENU} |</span>
+<span class="sd">        | ${KEYCODE_HOME} | Set Variable | 3 |</span>
+<span class="sd">        | Mobile Press Keycode | ${KEYCODE_HOME} |</span>
+<span class="sd">        | ${KEYCODE_BACK} | Set Variable | 4 |</span>
+<span class="sd">        | Mobile Press Keycode | ${KEYCODE_BACK} |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">press_keycode</span><span class="p">(</span><span class="n">keycode</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Long_Press_Keycode"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Long_Press_Keycode">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Long_Press_Keycode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keycode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Android Only，向Android系统下发keycode长按键事件</span>
+<span class="sd">        具体按键事件定义，可参考：</span>
+<span class="sd">        http://developer.android.com/reference/android/view/KeyEvent.html</span>
+
+<span class="sd">        | ${KEYCODE_MENU} | Set Variable | 82 |</span>
+<span class="sd">        | Mobile Long Press Keycode | ${KEYCODE_MENU} |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">long_press_keycode</span><span class="p">(</span><span class="n">keycode</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_MobileKeywords.Mobile_Swipe_In_Element"><a class="viewcode-back" href="../../../../usages.html#bsdgames.AppiumLibrary.keywords._mobilekeywords._MobileKeywords.Mobile_Swipe_In_Element">[docs]</a>    <span class="k">def</span> <span class="nf">Mobile_Swipe_In_Element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locator</span><span class="p">,</span> <span class="n">target_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Android Only Now, 定义元素内滑动操作。在一个元素内滑动，每次上下滑动元素一半可视长度</span>
+<span class="sd">        locator: 元素定位</span>
+<span class="sd">        target_num: 指定元素序号</span>
+<span class="sd">        [不输入（默认值）:   点击第一个元素]</span>
+<span class="sd">        [=0 :                点击最后一个元素]</span>
+<span class="sd">        [=x（&gt;0）:           点击第x个元素]</span>
+
+<span class="sd">        | Mobile Swipe In Element | identifier=custom_webview_more_action |</span>
+<span class="sd">        | Mobile Swipe In Element | ${图文页更多菜单栏框体} | 1 |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selected_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">loc</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">swipe</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span></div>
+
+<span class="c"># Private </span>
+    <span class="k">def</span> <span class="nf">_click_webview_element_autoswipe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; swipe loop + element.click on webview pages, such as game platform webview and public webview</span>
+
+<span class="sd">            Implemented seperately in Android &amp; iOS</span>
+<span class="sd">            inputs: target_locator, target_num</span>
+<span class="sd">            return: none</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#Android 自动滑动</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_andriod</span><span class="p">():</span>
+            <span class="c"># get&amp;verify target element with target_num</span>
+            <span class="c"># 获取目标元素 和 Webview空间的左边尺寸数据</span>
+            <span class="n">target_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selected_element</span><span class="p">(</span><span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>               
+            <span class="n">webview_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_elements</span><span class="p">(</span><span class="s">&#39;class=android.webkit.WebView&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>          
+
+            <span class="c"># get the swipe-times and swipe action(start-point and swipe-distance)</span>
+            <span class="c"># 获取 滑动 操作相关参数</span>
+            <span class="n">swipe_times</span><span class="p">,</span> <span class="n">start_loc_x</span><span class="p">,</span> <span class="n">start_loc_y</span><span class="p">,</span> <span class="n">swipe_distance</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_webview_element_autoswipe_get_swipe_actiondata</span><span class="p">(</span><span class="n">webview_element</span><span class="p">,</span> <span class="n">target_element</span><span class="p">)</span>
+            <span class="c">#self._debug(&quot;[debug] autoswipe action data:&quot;)</span>
+            <span class="c">#self._debug(&quot;[debug] swipe_times: %d, start_loc_x:%d, start_loc_y:%d, swipe_distance:%d&quot; % (swipe_times, start_loc_x, start_loc_y, swipe_distance))</span>
+
+            <span class="c">#Click Element with Auto Swipe for Andorid</span>
+            <span class="c"># 滑动屏幕 直至（次数限制内）元素出现在Webivew屏显范围内，再进行点击操作</span>
+            <span class="c"># Swipe loop(swipe-times and the element still not present in webview)</span>
+            <span class="c">#       Do a up/down swipe    </span>
+            <span class="c">#       get target element latest location</span>
+            <span class="c"># if new location appear in WebView Controller, Click the Elment </span>
+            <span class="c"># else print the failed info and do nothing to the element</span>
+            <span class="c">#       else try to Swipe a distance=Webview height</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">swipe_times</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_element_present_in_webview</span><span class="p">(</span><span class="n">webview_element</span><span class="p">,</span> <span class="n">target_element</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">):</span>                 
+                <span class="bp">self</span><span class="o">.</span><span class="n">swipe</span><span class="p">(</span><span class="n">start_loc_x</span><span class="p">,</span> <span class="n">start_loc_y</span><span class="p">,</span> <span class="n">start_loc_x</span><span class="p">,</span> <span class="n">start_loc_y</span><span class="o">+</span><span class="n">swipe_distance</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+                <span class="c">#self._debug(&#39;[debug] Element not present in Webview now, and do one swipe with swipe_distance: %d&#39; % swipe_distance)</span>
+                <span class="n">target_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selected_element</span><span class="p">(</span><span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+                <span class="n">swipe_times</span> <span class="o">-=</span><span class="mi">1</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="c">#self._debug(&#39;[debug] Now swipe_times left: %d&#39; % swipe_times)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_element_present_in_webview</span><span class="p">(</span><span class="n">webview_element</span><span class="p">,</span> <span class="n">target_element</span><span class="p">):</span>
+                <span class="c">#target_element.click()    </span>
+                <span class="n">x</span><span class="o">=</span><span class="n">target_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">target_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">target_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">target_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">click_a_point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&#39;[&gt;&gt;&gt;] Click the elment by element.click with locator: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">target_locator</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&#39;[xxx] Faile to swipe the element </span><span class="si">%s</span><span class="s"> present in Webview!&#39;</span> <span class="o">%</span> <span class="n">target_locator</span><span class="p">)</span>
+
+                
+        <span class="c"># IOS 自动滑动</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ios</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ios_auto_swipe</span><span class="p">(</span><span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_ios_auto_swipe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">):</span>
+        <span class="n">device_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_elements</span><span class="p">(</span><span class="s">&#39;xpath=//UIAWindow[1]&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">webView</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_elements</span><span class="p">(</span><span class="s">&#39;xpath=//UIAWebView[1]&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">webView_size</span> <span class="o">=</span> <span class="n">webView</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">webView_y</span> <span class="o">=</span> <span class="n">webView</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">webView_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">one_height</span> <span class="o">=</span> <span class="n">webView_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c"># 对游戏平台的特殊WebView特殊处理</span>
+        <span class="c"># 如果WebView一次性加载（页面超出device的屏幕），可以不用滑动直接点击</span>
+        <span class="k">if</span> <span class="n">one_height</span> <span class="o">&gt;</span> <span class="n">device_height</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Click_Element</span><span class="p">(</span><span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+            <span class="k">return</span> 
+        <span class="c"># 定义划动起始位置，滑动一个WebView的高度（默认WebView底部接屏幕底部）</span>
+        <span class="n">mystart_x</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">mystart_y</span> <span class="o">=</span> <span class="n">webView_y</span> <span class="o">+</span> <span class="n">one_height</span>
+        <span class="n">myend_x</span> <span class="o">=</span> <span class="n">mystart_x</span>
+        <span class="n">myend_y</span> <span class="o">=</span> <span class="n">webView_y</span>
+        <span class="c"># 获取元素起始坐标位置</span>
+        <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selected_element</span><span class="p">(</span><span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+        <span class="n">elem_y</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">elem_y</span> <span class="o">-</span> <span class="n">webView_y</span>
+        <span class="c"># 向上滑</span>
+        <span class="k">if</span> <span class="n">elem_y</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">elem_y</span> <span class="o">&gt;=</span> <span class="n">device_height</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Swipe</span><span class="p">(</span><span class="n">mystart_x</span><span class="p">,</span> <span class="n">mystart_y</span><span class="p">,</span> <span class="n">myend_x</span><span class="p">,</span> <span class="n">myend_y</span><span class="p">)</span>
+                <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selected_element</span><span class="p">(</span><span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+                <span class="n">elem_y</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c"># 向下滑</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">elem_y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Swipe</span><span class="p">(</span><span class="n">myend_x</span><span class="p">,</span> <span class="n">myend_y</span><span class="p">,</span> <span class="n">mystart_x</span><span class="p">,</span> <span class="n">mystart_y</span><span class="p">)</span>
+                <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_selected_element</span><span class="p">(</span><span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="p">)</span>
+                <span class="n">elem_y</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&#39;[&gt;&gt;&gt;]Click WebView Element &quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="n">target_locator</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_webview_element_autoswipe_get_swipe_actiondata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">webview_element</span><span class="p">,</span> <span class="n">target_element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; get swipe-actiondata with the webview element &amp;  the target element</span>
+<span class="sd">            inputs: webview_element, target_element</span>
+<span class="sd">            return: swipe_times, start_loc_x, start_loc_y, swipe_distance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#get webview location+size</span>
+        <span class="n">webview_location</span> <span class="o">=</span> <span class="n">webview_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">webview_size</span> <span class="o">=</span> <span class="n">webview_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="c">#get element location+size</span>
+        <span class="n">des_loc</span> <span class="o">=</span> <span class="n">target_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">des_size</span> <span class="o">=</span> <span class="n">target_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+        <span class="n">des_size_width</span> <span class="o">=</span> <span class="n">des_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">des_size_height</span> <span class="o">=</span> <span class="n">des_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">des_loc_y</span> <span class="o">=</span> <span class="n">des_loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">des_loc_bottom</span> <span class="o">=</span> <span class="n">des_loc_y</span> <span class="o">+</span> <span class="n">des_size_height</span>
+        <span class="n">des_loc_x</span> <span class="o">=</span> <span class="n">des_loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">webview_y</span> <span class="o">=</span> <span class="n">webview_location</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">webview_height</span> <span class="o">=</span> <span class="n">webview_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">webview_bottom</span> <span class="o">=</span> <span class="n">webview_y</span> <span class="o">+</span> <span class="n">webview_height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&#39;[debug] webview_location: (</span><span class="si">%d</span><span class="s">, </span><span class="si">%d</span><span class="s">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">webview_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">webview_y</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&#39;[debug] webview_size: (</span><span class="si">%d</span><span class="s">, </span><span class="si">%d</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">webview_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">webview_height</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&#39;[debug] des_loc: (</span><span class="si">%d</span><span class="s">, </span><span class="si">%d</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">des_loc_x</span><span class="p">,</span> <span class="n">des_loc_y</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">(</span><span class="s">&#39;[debug] des_size: (</span><span class="si">%d</span><span class="s">, </span><span class="si">%d</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">des_size_width</span><span class="p">,</span> <span class="n">des_size_height</span><span class="p">))</span>
+
+        <span class="n">start_loc_x</span> <span class="o">=</span> <span class="n">des_loc_x</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">des_size_width</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">swipe_times</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">des_loc_bottom</span> <span class="o">-</span> <span class="n">webview_bottom</span><span class="p">)</span><span class="o">/</span><span class="n">webview_height</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">des_loc_y</span> <span class="o">&gt;=</span> <span class="n">webview_y</span><span class="p">)</span> <span class="p">:</span>
+            <span class="c"># in case the target element is in webview</span>
+            <span class="n">start_loc_y</span> <span class="o">=</span> <span class="n">webview_bottom</span><span class="o">-</span><span class="mi">2</span>
+            <span class="n">swipe_distance</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">webview_height</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># otherwise the target element is above of the webview</span>
+            <span class="n">start_loc_y</span> <span class="o">=</span> <span class="n">webview_y</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">swipe_distance</span> <span class="o">=</span> <span class="n">webview_height</span><span class="o">-</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">swipe_times</span><span class="p">,</span> <span class="n">start_loc_x</span><span class="p">,</span> <span class="n">start_loc_y</span><span class="p">,</span> <span class="n">swipe_distance</span>
+
+
+    <span class="k">def</span> <span class="nf">_is_element_present_in_webview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">webview_element</span><span class="p">,</span> <span class="n">target_element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; get swipe-actiondata with the webview element &amp;  the target element</span>
+<span class="sd">            inputs: webview_element, target_element</span>
+<span class="sd">            return: boolen value: True or False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#get webview location+size</span>
+        <span class="n">webview_location</span> <span class="o">=</span> <span class="n">webview_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">webview_size</span> <span class="o">=</span> <span class="n">webview_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">webview_top</span> <span class="o">=</span> <span class="n">webview_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">webview_bottom</span> <span class="o">=</span> <span class="n">webview_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">webview_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s">&#39;[debug] y of webview_top &amp; webview_bottom: (</span><span class="si">%d</span><span class="s">, </span><span class="si">%d</span><span class="s">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">webview_top</span><span class="p">,</span> <span class="n">webview_bottom</span><span class="p">))</span>
+        <span class="c">#get element location+size</span>
+        <span class="n">target_loc</span> <span class="o">=</span> <span class="n">target_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">target_size</span> <span class="o">=</span> <span class="n">target_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">target_element_top</span> <span class="o">=</span> <span class="n">target_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">target_element_bottom</span> <span class="o">=</span> <span class="n">target_element</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">target_element</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s">&#39;[debug] y of target_element_top &amp; target_element_bottom: (</span><span class="si">%d</span><span class="s">, </span><span class="si">%d</span><span class="s">)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">target_element_top</span><span class="p">,</span> <span class="n">target_element_bottom</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">target_element_bottom</span> <span class="o">&lt;=</span> <span class="n">webview_bottom</span> <span class="ow">and</span> <span class="n">target_element_top</span> <span class="o">&gt;=</span> <span class="n">webview_top</span><span class="p">):</span>
+            <span class="n">is_inwebview_flag</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_inwebview_flag</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s">&#39;[debug] The Target element is in webview control: </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">is_inwebview_flag</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">is_inwebview_flag</span>
+        
+
+    <span class="k">def</span> <span class="nf">_get_selected_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_locator</span><span class="p">,</span> <span class="n">target_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; get&amp;verify target element with target_num</span>
+<span class="sd">            inputs: target_locator, target_num</span>
+<span class="sd">            return: target_element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_page_contains_element</span><span class="p">(</span><span class="n">target_locator</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">target_num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">elements_ls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_elements</span><span class="p">(</span><span class="n">target_locator</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements_ls</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">elements_ls</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">capture_page_screenshot</span><span class="p">()</span> 
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s">&quot;[xxx]The target_num is &#39;</span><span class="si">%d</span><span class="s">&#39;, which is out of the length of elements_ls searched by &#39;</span><span class="si">%s</span><span class="s">&#39;.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">target_num</span><span class="p">),</span> <span class="n">target_locator</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, joe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

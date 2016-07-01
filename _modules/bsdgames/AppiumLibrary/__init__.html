@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bsdgames.AppiumLibrary.__init__ &mdash; ALPHA 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="ALPHA 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for bsdgames.AppiumLibrary.__init__</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">keywords</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">version</span> <span class="kn">import</span> <span class="n">VERSION</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">LibraryListener</span>
+<span class="kn">from</span> <span class="nn">robot.libraries.BuiltIn</span> <span class="kn">import</span> <span class="n">BuiltIn</span>
+
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="n">VERSION</span>
+
+
+<div class="viewcode-block" id="AppiumLibrary"><a class="viewcode-back" href="../../../usages.html#bsdgames.AppiumLibrary.__init__.AppiumLibrary">[docs]</a><span class="k">class</span> <span class="nc">AppiumLibrary</span><span class="p">(</span>
+    <span class="n">_LoggingKeywords</span><span class="p">,</span>
+    <span class="n">_RunOnFailureKeywords</span><span class="p">,</span>
+    <span class="n">_ElementKeywords</span><span class="p">,</span>
+    <span class="n">_ScreenshotKeywords</span><span class="p">,</span>
+    <span class="n">_ApplicationManagementKeywords</span><span class="p">,</span>
+    <span class="n">_WaitingKeywords</span><span class="p">,</span>
+    <span class="n">_TouchKeywords</span><span class="p">,</span>
+    <span class="n">_KeyeventKeywords</span><span class="p">,</span>
+    <span class="n">_AndroidUtilsKeywords</span><span class="p">,</span>
+    <span class="n">_MobileKeywords</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;AppiumLibrary is a App testing library for Robot Framework.</span>
+
+<span class="sd">    *Locating elements*</span>
+
+<span class="sd">    All keywords in AppiumLibrary that need to find an element on the app</span>
+<span class="sd">    take an argument, `locator`. By default, when a locator value is provided,</span>
+<span class="sd">    it is matched against the key attributes of the particular element type.</span>
+<span class="sd">    For example, `id` and `name` are key attributes to all elements, and</span>
+<span class="sd">    locating elements is easy using just the `id` as a `locator`. For example:</span>
+
+<span class="sd">    ``Click Element  my_element``</span>
+
+<span class="sd">    Appium additionally supports some of the _Mobile JSON Wire Protocol_</span>
+<span class="sd">    (https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile) locator strategies</span>
+<span class="sd">    It is also possible to specify the approach AppiumLibrary should take</span>
+<span class="sd">    to find an element by specifying a lookup strategy with a locator</span>
+<span class="sd">    prefix. Supported strategies are:</span>
+
+<span class="sd">    | *Strategy*        | *Example*                                                      | *Description*                     |</span>
+<span class="sd">    | identifier        | Click Element `|` identifier=my_element                        | Matches by @id or @name attribute |</span>
+<span class="sd">    | id                | Click Element `|` id=my_element                                | Matches by @id attribute          |</span>
+<span class="sd">    | name              | Click Element `|` name=my_element                              | Matches by @name attribute        |</span>
+<span class="sd">    | xpath             | Click Element `|` xpath=//UIATableView/UIATableCell/UIAButton  | Matches with arbitrary XPath      |</span>
+<span class="sd">    | link              | Click Element `|` link=My Link                                 | Webview only Matches anchor elements by their link text      |</span>
+<span class="sd">    | partial link      | Click Element `|` partial link=My Link                         | Webveiw only Matches anchor elements by their partial link text |</span>
+<span class="sd">    | class             | Click Element `|` class=UIAPickerWheel                         | Matches by class                  |</span>
+<span class="sd">    | accessibility_id  | Click Element `|` accessibility_id=t                           | Accessibility options utilize.    |</span>
+<span class="sd">    | android           | Click Element `|` android=new UiSelector().description(&#39;Apps&#39;) | Matches by Android UI Automator   |</span>
+<span class="sd">    | ios               | Click Element `|` ios=.buttons().withName(&#39;Apps&#39;)              | Matches by iOS UI Automation      |</span>
+<span class="sd">    | css               | Click Element `|` css=.green_button                            | Matches by css in webview         |</span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ROBOT_LIBRARY_SCOPE</span> <span class="o">=</span> <span class="s">&#39;GLOBAL&#39;</span>
+    <span class="n">ROBOT_LIBRARY_VERSION</span> <span class="o">=</span> <span class="n">VERSION</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">run_on_failure</span><span class="o">=</span><span class="s">&#39;Capture Page Screenshot&#39;</span><span class="p">,</span><span class="n">mobile_gif</span><span class="o">=</span><span class="s">&#39;False&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;AppiumLibrary can be imported with optional arguments.</span>
+
+<span class="sd">        `timeout` is the default timeout used to wait for all waiting actions.</span>
+<span class="sd">        It can be later set with `Set Appium Timeout`.</span>
+
+<span class="sd">        `run_on_failure` specifies the name of a keyword (from any available</span>
+<span class="sd">        libraries) to execute when a AppiumLibrary keyword fails. By default</span>
+<span class="sd">        `Capture Page Screenshot` will be used to take a screenshot of the current page.</span>
+<span class="sd">        Using the value `No Operation` will disable this feature altogether. See</span>
+<span class="sd">        `Register Keyword To Run On Failure` keyword for more information about this</span>
+<span class="sd">        functionality.</span>
+<span class="sd">        `mobile_gif` Enable/Disable gif generation for each Test Case, Defalut setting is False/FALSE</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">        | Library | AppiumLibrary | 10 | # Sets default timeout to 10 seconds                                                                             |</span>
+<span class="sd">        | Library | AppiumLibrary | timeout=10 | run_on_failure=No Operation | # Sets default timeout to 10 seconds and does nothing on failure           |</span>
+<span class="sd">        | Library | AppiumLibrary | timeout=10 | mobile_gif=TRUE             | # Sets default timeout to 10 seconds and enable gif file generation for each case |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">AppiumLibrary</span><span class="o">.</span><span class="n">__bases__</span><span class="p">:</span>
+            <span class="n">base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_appium_timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_keyword_to_run_on_failure</span><span class="p">(</span><span class="n">run_on_failure</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mobile_Set_Gif_Flag</span><span class="p">(</span><span class="n">mobile_gif</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mobile_gen_gif</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ROBOT_LIBRARY_LISTENER</span> <span class="o">=</span> <span class="n">LibraryListener</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, joe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
