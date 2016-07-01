@@ -91,9 +91,9 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/POM.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/RFUI-Framework.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/POM.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/RFUI-Framework.qhc"
 
 .PHONY: applehelp
 applehelp:
@@ -110,8 +110,8 @@ devhelp:
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/POM"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/POM"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/RFUI-Framework"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/RFUI-Framework"
 	@echo "# devhelp"
 
 .PHONY: epub

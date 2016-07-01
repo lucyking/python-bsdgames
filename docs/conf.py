@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# POM documentation build configuration file, created by
-# sphinx-quickstart on Fri Jul 01 16:47:46 2016.
+# RFUI-Framework documentation build configuration file, created by
+# sphinx-quickstart on Fri Jul 01 17:05:46 2016.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -16,11 +16,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
-__dir__ = os.path.dirname(os.path.abspath(__file__))
-__pkg__ = os.path.dirname(__dir__)
-sys.path.insert(1, __pkg__)
+# import os
+# import sys
+# sys.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration ------------------------------------------------
 
@@ -50,9 +48,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'POM'
-copyright = u'2016, joe'
-author = u'joe'
+project = u'RFUI-Framework'
+copyright = u'2016, QA'
+author = u'QA'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -135,7 +133,7 @@ html_theme = 'alabaster'
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = u'POM v0.0.1'
+# html_title = u'RFUI-Framework v0.0.1'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -235,7 +233,7 @@ html_static_path = ['_static']
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'POMdoc'
+htmlhelp_basename = 'RFUI-Frameworkdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -261,8 +259,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'POM.tex', u'POM Documentation',
-     u'joe', 'manual'),
+    (master_doc, 'RFUI-Framework.tex', u'RFUI-Framework Documentation',
+     u'QA', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -297,7 +295,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pom', u'POM Documentation',
+    (master_doc, 'rfui-framework', u'RFUI-Framework Documentation',
      [author], 1)
 ]
 
@@ -312,8 +310,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'POM', u'POM Documentation',
-     author, 'POM', 'One line description of project.',
+    (master_doc, 'RFUI-Framework', u'RFUI-Framework Documentation',
+     author, 'RFUI-Framework', 'One line description of project.',
      'Miscellaneous'),
 ]
 
