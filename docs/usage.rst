@@ -5,4 +5,11 @@ Public class
     :members:
 
 
+Common methods
+--------------------------
+
+.. autoclass:: bsdgames._pom.Pom
+    :members:
+
+
 

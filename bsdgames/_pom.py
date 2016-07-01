@@ -14,11 +14,20 @@ class Pom:
     Nzero = 318.510107  # lunar mean long of node at EPOCH
 
     def __init__(self):
+        """
+        Args:
+            name: image filename
+            image: opencv image object
+            offset: offset of image center
+            anchor: not supported
+            resolution: image origin screen resolution
+            rsl: alias of resolution
+            threshold: image match threshold, usally (0, 1]
+            th: alias of threshold
+        """
         self.pom()
 
     def adj360(self, deg):
-    """Set Mobile GIF Generating Flag
-    """
         while (deg < 0 or deg > 360):
             if deg < 0:
                 deg += 360
