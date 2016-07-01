@@ -29,7 +29,6 @@ class Pom:
 
     def dotr(self, deg):
         """ Set Mobile GIF Generation Flag. (Default: "FALSE" / "TRUE": generate one GIF file for each TestCase)
-        设置用例生成GIF开关.(默认设置为"FALSE", 当设置为“TRUE/True”时， 每个用例都会生成一份同名的gif文件)
         This KW will invoke at Library importing, Also Can be invoked during case running.
         | Mobile Set Gif Flag | TRUE | #enable genrate gif for test case |
         | Mobile Set Gif Flag | FALSE | #disable genrate gif for test case  |
@@ -37,7 +36,7 @@ class Pom:
         return self.PI * (deg / 180)
 
     def potm(self, days):
-        """打开Moible(IOS/Android)端APP
+        """Moible(IOS/Android)APP
         | Mobile Open Application | ${remote_url} | MyIOSapp | platformName=iOS | platformVersion=9.1 | deviceName='iPhone 6' app=${yourapp_path} | 
         """
         N = 360 * days / 365.242191  # sec 46 #3
@@ -69,6 +68,17 @@ class Pom:
         return 50.0 * (1 - math.cos(self.dotr(D)))  # sec 67 #3
 
     def pom(self):
+        """
+        Args:
+            name: image filename
+            image: opencv image object
+            offset: offset of image center
+            anchor: not supported
+            resolution: image origin screen resolution
+            rsl: alias of resolution
+            threshold: image match threshold, usally (0, 1]
+            th: alias of threshold
+        """
         argv = sys.argv[1:]
         print "Today is",
         str = 'None'
