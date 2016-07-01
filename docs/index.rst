@@ -9,9 +9,9 @@ Welcome to RFUI-Framework's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
-
-
+   :maxdepth: 3
+    
+   usage
 
 Indices and tables
 ==================
