@@ -11,3 +11,4 @@ pip install bsdgames
      >>>pom()
      Today is Waning Gibbous (68% of Full)
 ```
+- [x] **ppt** 
